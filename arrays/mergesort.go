@@ -1,4 +1,5 @@
-// This package implement sorting algorithm
+// This file implements sorting algorithms
+
 package arrays
 
 // merge combines the left and right solutions in-place on the origina array

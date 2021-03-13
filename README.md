@@ -3,7 +3,7 @@
 This small project is an HTTP web server on port 8080 that exposes two endpoints for the purpose of exercise.
 
 
-*(Work in Progress)* - The first endpoint is **/arrays/**, which serves GET requests with the following JSON body:
+*(Work in Progress)* - The first endpoint is **/arrays/**, which serves POST requests with the following JSON body:
 
 ```json
 {

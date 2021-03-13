@@ -1,15 +1,38 @@
+// This file defines Handler view functions to be mapped to Web resources
+
 package arrays
 
 import (
 	"fmt"
 	"net/http"
+	"encoding/json"
+	"io/ioutil"
 )
 
-func HomeHandler(writer http.ResponseWriter, request *http.Request) {
-	cosa := []int {9, 8, 7, 6, 5, 4, 3, 2, 1}
+func ArraysHandler(writer http.ResponseWriter, request *http.Request) {
+	var jsonData ArraysJSON
+	contents, err := ioutil.ReadAll(request.Body)
+	json.Unmarshal(contents, &jsonData)
 
-	fmt.Fprintf(writer, "<b>Welcome to the Home Page! 🐲</b>\n")
-	fmt.Fprintf(writer, "<p>Sin ordernar: %v</p>", cosa)
-	Mergesort(cosa)
-	fmt.Fprintf(writer, "<p>Ordenado: %v</p>", cosa)
+	array := jsonData.Unsorted
+
+	if err != nil {
+		fmt.Println("An error has occurred when parsing JSON data: ", err)
+	} else {
+		original := make([]int, len(array))
+		copy(original, array)
+
+		Mergesort(array)
+		jsonData.Sorted = array
+		jsonData.Unsorted = original
+
+		jsonResponse, err2 := json.Marshal(&jsonData)
+
+		if err2 != nil {
+			fmt.Println("An error has occurred when packing JSON response", err)
+		} else {
+			writer.Header().Set("Content-Type", "application/json; charset=utf-8")
+			writer.Write(jsonResponse)
+		}
+	}
 }
