@@ -1,5 +1,5 @@
 // This package implement sorting algorithm
-package sorting
+package arrays
 
 // merge combines the left and right solutions in-place on the origina array
 func merge(array []int, left []int, right []int) {
