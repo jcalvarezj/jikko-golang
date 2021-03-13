@@ -1,4 +1,4 @@
-module github.com/jcalvarezj/jikko-golang
+module jikko-golang
 
 go 1.16
 

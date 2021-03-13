@@ -5,18 +5,14 @@ import (
 	"log"
 	"net/http"
 
+	"jikko-golang/views"
+
 	"github.com/gorilla/mux"
 )
 
-func homeView(writer http.ResponseWriter, request *http.Request) {
-	fmt.Fprintf(writer, "<b>Bienvenido al portal de inicio!!</b>")
-}
-
-
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/", homeView)
+	router.HandleFunc("/", views.HomeView)
+	fmt.Println("Started server on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", router))
-	fmt.Println("It works")
-
 }
