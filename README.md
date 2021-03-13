@@ -2,8 +2,11 @@
 
 This small project is an HTTP web server on port 8080 that exposes endpoints for the purpose of exercise.
 
+## Endpoints
 
-*(Work in Progress)* - The **/arrays/**  endpoint serves POST requests with the following JSON body:
+### /arrays/
+
+This endpoint serves POST requests with the following JSON body:
 
 ```json
 {
