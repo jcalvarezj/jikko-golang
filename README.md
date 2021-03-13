@@ -1,9 +1,9 @@
 # Jikko-Golang
 
-This small project is an HTTP web server on port 8080 that exposes two endpoints for the purpose of exercise.
+This small project is an HTTP web server on port 8080 that exposes endpoints for the purpose of exercise.
 
 
-*(Work in Progress)* - The first endpoint is **/arrays/**, which serves GET requests with the following JSON body:
+*(Work in Progress)* - The **/arrays/**  endpoint serves POST requests with the following JSON body:
 
 ```json
 {
@@ -19,6 +19,10 @@ This should give a 200-status JSON response of
 	"sorted": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 ```
+
+If there is any missing or incorrect data, it will return a 400 status code with the message:
+
+> **Incorrect or missing data in request body**
 
 ## Compilation and Execution
 
