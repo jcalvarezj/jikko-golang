@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!--Description goes here.
+	@author J. Alvarez-->
+<html>
+	<head>
+		<title> Detail of user {{.Username}} </title>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<div id="content">
+			<p><b>Username:</b> {{.Username}}</p>
+			<p><b>Full Name:</b> {{.GetFullName}}</p>
+			<p><b>Birthday:</b> {{.Birthday.Format "2006-01-02"}}</p>
+			<p><b>Sex:</b> {{.Sex}}</p>
+			<p><b>Biography:</b> {{.Biography}}</p>
+		</div>
+	</body>
+</html>
+

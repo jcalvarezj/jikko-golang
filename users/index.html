@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--Description goes here.
+	@author J. Alvarez-->
+<html>
+	<head>
+		<title> Users querying page </title>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<div id="test">
+			<p>Template test:<p>
+			<p>User {{.Username}}'s birthday is on {{.Birthday.Format "2006-01-02"}}</p>
+		</div>
+		<div id="content">
+			<form action="" onSubmit="setUrl(this)">
+				<p>Check user with id: <input type="text" id="cosa" /></p>
+			<input type="submit" />
+		</form>
+		</div>
+		<script type="text/javascript">
+			function setUrl(form) {
+				val = form.cosa.value;
+				form.action="users/"+val;
+				event.preventDefault();
+				form.submit();
+			}
+		</script>
+	</body>
+</html>
+
