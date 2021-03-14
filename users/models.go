@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+// User represents the user entity
 type User struct {
 	Username string
 	FirstName string
@@ -16,6 +17,7 @@ type User struct {
 	Biography string
 }
 
+// GetFullName returns the Full Name as "FirstName LastName"
 func (user User) GetFullName() string {
 	return fmt.Sprintf("%s %s", user.FirstName, user.LastName)
 }

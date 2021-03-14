@@ -7,12 +7,15 @@
 		<meta charset="UTF-8" />
 	</head>
 	<body>
+		<h2>USER DETAILS<h2>
 		<div id="content">
-			<p><b>Username:</b> {{.Username}}</p>
-			<p><b>Full Name:</b> {{.GetFullName}}</p>
-			<p><b>Birthday:</b> {{.Birthday.Format "2006-01-02"}}</p>
-			<p><b>Sex:</b> {{.Sex}}</p>
-			<p><b>Biography:</b> {{.Biography}}</p>
+			{{with .user}}
+				<p><b>Username:</b> {{.Username}}</p>
+				<p><b>Full Name:</b> {{.GetFullName}}</p>
+				<p><b>Birthday:</b> {{.Birthday.Format "2006-01-02"}}</p>
+				<p><b>Sex:</b> {{.Sex}}</p>
+				<p><b>Biography:</b> {{.Biography}}</p>
+			{{end}}
 		</div>
 	</body>
 </html>

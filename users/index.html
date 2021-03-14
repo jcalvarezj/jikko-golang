@@ -9,17 +9,28 @@
 	<body>
 		<div id="test">
 			<p>Template test:<p>
-			<p>User {{.Username}}'s birthday is on {{.Birthday.Format "2006-01-02"}}</p>
+			<p>User {{.testUser.Username}}'s birthday is on {{.testUser.Birthday.Format "2006-01-02"}}</p>
 		</div>
 		<div id="content">
 			<form action="" onSubmit="setUrl(this)">
-				<p>Check user with id: <input type="text" id="cosa" /></p>
+				<p>Check user with id: <input type="text" id="txtId" /></p>
 			<input type="submit" />
 		</form>
 		</div>
+		<div id="all-users">
+			{{range $user := .allUsers}}
+				<div>
+					<p><b>Username:</b> {{$user.Username}}</p>
+					<p><b>Full Name:</b> {{$user.GetFullName}}</p>
+					<p><b>Birthday:</b> {{$user.Birthday.Format "2006-01-02"}}</p>
+					<p><b>Sex:</b> {{$user.Sex}}</p>
+					<p><b>Biography:</b> {{$user.Biography}}</p>
+				</div>
+			{{end}}
+		</div>
 		<script type="text/javascript">
 			function setUrl(form) {
-				val = form.cosa.value;
+				val = form.txtId.value;
 				form.action="users/"+val;
 				event.preventDefault();
 				form.submit();
