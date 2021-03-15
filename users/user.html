@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--User details page.
+	@author J. Alvarez-->
+<html>
+	<head>
+		<title> Detail of user {{.Username}} </title>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<h2>USER DETAILS</h2>
+		<div id="content">
+			{{if not .user}}
+				<h3>Sorry, that user doesn't exist in the database!</h3>
+			{{else}}
+				{{with .user}}
+					<p><b>Username:</b> {{.Username}}</p>
+					<p><b>Full Name:</b> {{.GetFullName}}</p>
+					<p><b>Birthday:</b> {{.Birthday.Format "2006-01-02"}}</p>
+					<p><b>Sex:</b> {{.Sex}}</p>
+					<p><b>Biography:</b> {{.Biography}}</p>
+				{{end}}
+			{{end}}
+		</div>
+	</body>
+</html>
+

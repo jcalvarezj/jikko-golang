@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 )
 
+// ArraysHandler is the handler function for the /arrays resource POST request
 func ArraysHandler(writer http.ResponseWriter, request *http.Request) {
 	var jsonData ArraysJSON
 	contents, err := ioutil.ReadAll(request.Body)
