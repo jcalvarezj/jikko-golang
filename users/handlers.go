@@ -5,9 +5,12 @@ package users
 import (
 	"fmt"
 	"time"
+	"strconv"
 	"net/http"
 	"html/template"
 	"database/sql"
+
+	"github.com/gorilla/mux"
 )
 
 // UsersHandler represents the controller for the User model
@@ -70,8 +73,19 @@ func (self *UsersHandler) UsersRootHandler(writer http.ResponseWriter, request *
 // UserDetailHandler renders the user.html template for the /users/{id} resource,
 // sending it the user struct found for that id
 func (self *UsersHandler) UserDetailHandler(writer http.ResponseWriter, request *http.Request) {
-	data := DataMap {
-		"user": createTestUser(),
+	params := mux.Vars(request)
+	id, err := strconv.Atoi(params["id"])
+	if err != nil {
+		self.NotFoundHandler(writer, request)
+	} else {
+		data := DataMap {
+			"user": GetUserById(*self.DbConn, id),
+		}
+		executeTemplate(writer, request, data, "users/user.html")
 	}
-	executeTemplate(writer, request, data, "users/user.html")
+}
+
+// NotFoundHandler is the handler for the "404 - Not Found" page
+func (self *UsersHandler) NotFoundHandler(writer http.ResponseWriter, request *http.Request) {
+	executeTemplate(writer, request, nil, "users/404.html")
 }

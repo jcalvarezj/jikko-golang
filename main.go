@@ -31,6 +31,7 @@ func route(usersHandler *users.UsersHandler) {
 	router.HandleFunc("/arrays", arrays.ArraysHandler).Methods("POST")
 	router.HandleFunc("/users", usersHandler.UsersRootHandler)
 	router.HandleFunc("/users/{id}", usersHandler.UserDetailHandler)
+	router.NotFoundHandler = http.HandlerFunc(usersHandler.NotFoundHandler)
 
 	fmt.Println("Started server on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", router))

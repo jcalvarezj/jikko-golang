@@ -11,7 +11,7 @@ import (
 // records in the "user" table. If there are no records, an empty slice is returned
 func GetAllUsers(dbConn sql.DB) []User {
 	var allUsers []User
-	results, err := dbConn.Query("SELECT * FROM user")
+	results, err := dbConn.Query("SELECT username, first_name, last_name, birthday, sex, biography FROM user")
 	if err != nil {
 		fmt.Println("An error has occurred when performing the query. ", err)
 		return []User {}
@@ -30,24 +30,30 @@ func GetAllUsers(dbConn sql.DB) []User {
 }
 
 // GetUserById returns an instance of User, found by id in the "user" table
-func GetUserById(dbConn sql.DB, id uint) *User {
-	results, err := dbConn.Query("SELECT * FROM user WHERE id = ?", id)
+func GetUserById(dbConn sql.DB, id int) *User {
+	results, err := dbConn.Query("SELECT username, first_name, last_name, birthday, sex, biography FROM user WHERE id = ?", id)
+	defer results.Close()
 	if err != nil {
 		fmt.Println("An error has occurred when performing the query. ", err)
 		return nil
 	} else {
 		var user User
-		err := results.Scan(&user.Username, &user.FirstName, &user.LastName,
-					&user.Birthday, &user.Sex, &user.Biography)
-		switch err {
-			case sql.ErrNoRows:
-				fmt.Println("No rows were found")
-				return nil
-			case nil:
-				return &user
-			default:
-				fmt.Println("An error has occurred when retrieving data. ", err)
-				return nil
+		success := results.Next()
+		if !success {
+			return nil
+		} else {
+			err := results.Scan(&user.Username, &user.FirstName, &user.LastName,
+						&user.Birthday, &user.Sex, &user.Biography)
+			switch err {
+				case sql.ErrNoRows:
+					fmt.Println("No rows were found")
+					return nil
+				case nil:
+					return &user
+				default:
+					fmt.Println("An error has occurred when retrieving data. ", err)
+					return nil
+			}
 		}
 	}
 }
