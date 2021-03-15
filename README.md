@@ -2,6 +2,15 @@
 
 This small project is an HTTP web server on port 8080 that exposes endpoints for the purpose of exercise.
 
+## Previous requirements
+
+A MySQL database server should be running locally with a **jikkodb** database, which should have the **user** table and a **jikkouser** user identified by **jikkopass**.
+It is possible to import the **jikkodb.sql** script on the **jikkodb** database to create and fill the **user** table.
+
+## Compilation and Execution
+
+Run `go build` to compile, and then `./jikko-golang` to run the server
+
 ## Endpoints
 
 ### /arrays/
@@ -27,6 +36,10 @@ If there is any missing or incorrect data, it will return a 400 status code with
 
 > **Incorrect or missing data in request body**
 
-## Compilation and Execution
+### /users/
 
-Run `go build` to compile, and then `./jikko-golang` to run the server
+This endpoint serves either GET/POST requests, responding with an HTML page that displays a form to search user by id, and lists all the users in the database below
+
+### /users/{id}
+
+This endpoint serves either GET/POST requests, responding with an HTML page that displays the user detail page for the user identified by the provided index **id** (integer) as a URL parameter
