@@ -42,4 +42,4 @@ This endpoint serves either GET/POST requests, responding with an HTML page that
 
 ### /users/{id}
 
-This endpoint serves either GET/POST requests, responding with an HTML page that displays the user detail page for the user identified by the provided index **id** as a URL parameter
+This endpoint serves either GET/POST requests, responding with an HTML page that displays the user detail page for the user identified by the provided index **id** (integer) as a URL parameter
