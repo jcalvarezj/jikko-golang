@@ -9,7 +9,15 @@ import (
 	"io/ioutil"
 )
 
-// ArraysHandler is the handler function for the /arrays resource POST request
+// ArraysHandler godoc
+// @Summary Serves the /arrays resource POST requests
+// @Description Serves the /arrays resource POST requests by receiving a JSON object with an unsorted numbers array and responds with a JSON object with that array and its sorted version
+// @Accept json
+// @Produce json
+// @Success 200 {object} string
+// @Failure 400 {object} string
+// @Failure 405 {object} string
+// @Router /arrays [post]
 func ArraysHandler(writer http.ResponseWriter, request *http.Request) {
 	var jsonData ArraysJSON
 	contents, err := ioutil.ReadAll(request.Body)
