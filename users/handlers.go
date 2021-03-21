@@ -66,7 +66,7 @@ func executeTemplate(writer http.ResponseWriter, request *http.Request, data Dat
 // @Router /users [get]
 func (self *UsersHandler) UsersRootHandler(writer http.ResponseWriter, request *http.Request) {
 	user := createTestUser()
-	allUsers := GetAllUsers(*self.DbConn)
+	allUsers := GetAllUsers(self.DbConn)
 
 	data := DataMap {
 		"testUser": user,
@@ -92,7 +92,7 @@ func (self *UsersHandler) UserDetailHandler(writer http.ResponseWriter, request 
 		self.NotFoundHandler(writer, request)
 	} else {
 		data := DataMap {
-			"user": GetUserById(*self.DbConn, id),
+			"user": GetUserById(self.DbConn, id),
 		}
 		executeTemplate(writer, request, data, "users/user.html")
 	}
