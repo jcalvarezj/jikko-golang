@@ -1,8 +1,8 @@
 # Jikko-Golang
 
-This small project is an HTTP web server on port 8080 that exposes endpoints for the purpose of exercise.
+This small project is an HTTP web server on port 8080 that exposes endpoints for the purpose of exercise. Includes API documentation with [Swag](https://github.com/swaggo/swag) exposed on **/swagger**
 
-## Previous requirements
+## Requirements
 
 A MySQL database server should be running locally with a **jikkodb** database, which should have the **user** table and a **jikkouser** user identified by **jikkopass**.
 It is possible to import the **jikkodb.sql** script on the **jikkodb** database to create and fill the **user** table.
@@ -13,7 +13,11 @@ Run `go build` to compile, and then `./jikko-golang` to run the server
 
 ## Endpoints
 
-### /arrays/
+### /swagger
+
+Presents API documentation for the other endpoints
+
+### /arrays
 
 This endpoint serves POST requests with the following JSON body:
 
@@ -36,7 +40,7 @@ If there is any missing or incorrect data, it will return a 400 status code with
 
 > **Incorrect or missing data in request body**
 
-### /users/
+### /users
 
 This endpoint serves either GET/POST requests, responding with an HTML page that displays a form to search user by id, and lists all the users in the database below
 
