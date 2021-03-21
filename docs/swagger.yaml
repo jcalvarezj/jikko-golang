@@ -1,0 +1,85 @@
+basePath: /
+definitions:
+  arrays.ArraysJSON:
+    properties:
+      sorted:
+        items:
+          type: integer
+        type: array
+      unsorted:
+        items:
+          type: integer
+        type: array
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is an example Web server that sorts arrays and displays user info
+  title: Jikko-Golang REST API
+  version: "1.0"
+paths:
+  /arrays:
+    post:
+      consumes:
+      - application/json
+      description: Serves the /arrays resource POST requests by receiving a JSON object
+        with an unsorted numbers array and responds with a JSON object with that array
+        and its sorted version
+      parameters:
+      - description: The unsorted array of numbers
+        in: body
+        name: unsorted
+        required: true
+        schema:
+          $ref: '#/definitions/arrays.ArraysJSON'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "405":
+          description: Method Not Allowed
+          schema:
+            type: string
+      summary: Serves the /arrays resource POST requests
+  /users:
+    get:
+      description: Renders the index.html template for the /users resource, showing
+        all users and a form to query a user
+      operationId: get-all-users
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Serves the /users resource
+  /users/{id}:
+    get:
+      description: Renders the user.html template for the /users/{id} resource, showing
+        the user by specified path variable {id}
+      operationId: get-user-by-id
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "500":
+          description: ""
+      summary: Serves the /users/{id} resource,
+swagger: "2.0"

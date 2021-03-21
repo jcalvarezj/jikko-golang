@@ -7,12 +7,20 @@ import (
 	"log"
 	"net/http"
 
+	_ "jikko-golang/docs"
 	"jikko-golang/arrays"
 	"jikko-golang/users"
 	"jikko-golang/repository"
 
 	"github.com/gorilla/mux"
+	"github.com/swaggo/http-swagger"
 )
+
+// @title Jikko-Golang REST API
+// @version 1.0
+// @description This is an example Web server that sorts arrays and displays user info
+// @host localhost:8080
+// @BasePath /
 
 // Handler view for the root resource
 func homeHandler(writer http.ResponseWriter, request *http.Request) {
@@ -31,6 +39,12 @@ func route(usersHandler *users.UsersHandler) {
 	router.HandleFunc("/arrays", arrays.ArraysHandler).Methods("POST")
 	router.HandleFunc("/users", usersHandler.UsersRootHandler)
 	router.HandleFunc("/users/{id}", usersHandler.UserDetailHandler)
+
+	router.PathPrefix("/swagger").Handler(httpSwagger.Handler(
+		httpSwagger.URL("http://localhost:8080/swagger/doc.json"),
+	))
+
+	//router.HandleFunc("/swagger", httpSwagger.WrapHandler)
 	router.NotFoundHandler = http.HandlerFunc(usersHandler.NotFoundHandler)
 
 	fmt.Println("Started server on port 8080")
