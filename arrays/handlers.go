@@ -12,6 +12,7 @@ import (
 // ArraysHandler godoc
 // @Summary Serves the /arrays resource POST requests
 // @Description Serves the /arrays resource POST requests by receiving a JSON object with an unsorted numbers array and responds with a JSON object with that array and its sorted version
+// @Param unsorted body arrays.ArraysJSON true "The unsorted array of numbers"
 // @Accept json
 // @Produce json
 // @Success 200 {object} string

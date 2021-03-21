@@ -34,6 +34,17 @@ var doc = `{
                     "application/json"
                 ],
                 "summary": "Serves the /arrays resource POST requests",
+                "parameters": [
+                    {
+                        "description": "The unsorted array of numbers",
+                        "name": "unsorted",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/arrays.ArraysJSON"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -100,6 +111,25 @@ var doc = `{
                     },
                     "500": {
                         "description": ""
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "arrays.ArraysJSON": {
+            "type": "object",
+            "properties": {
+                "sorted": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "unsorted": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
                     }
                 }
             }
