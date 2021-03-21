@@ -12,10 +12,10 @@
 			<p>User {{.testUser.Username}}'s birthday is on {{.testUser.Birthday.Format "2006-01-02"}}</p>
 		</div>
 		<div id="content">
-			<form action="" onSubmit="setUrl(this)">
-				<p>Check user with id number: <input type="text" id="txtId" /></p>
-			<input type="submit" />
-		</form>
+			<form onSubmit="setUrl(this)">
+				<p>Check user with id number: <input type="number" id="txtId" required /></p>
+				<input type="submit" />
+			</form>
 		</div>
 		<hr/>
 		<h2>List of all users</h2>

@@ -57,10 +57,16 @@ func executeTemplate(writer http.ResponseWriter, request *http.Request, data Dat
 	}
 }
 
-// UsersRootHandler renders the index.html template for the /users resource
+// UsersRootHandler godoc
+// @Summary Serves the /users resource
+// @Description Renders the index.html template for the /users resource, showing all users and a form to query a user
+// @ID get-all-users
+// @Produce html
+// @Success 200 {object} string
+// @Router /users [get]
 func (self *UsersHandler) UsersRootHandler(writer http.ResponseWriter, request *http.Request) {
 	user := createTestUser()
-	allUsers := GetAllUsers(*self.DbConn)
+	allUsers := GetAllUsers(self.DbConn)
 
 	data := DataMap {
 		"testUser": user,
@@ -70,8 +76,15 @@ func (self *UsersHandler) UsersRootHandler(writer http.ResponseWriter, request *
 	executeTemplate(writer, request, data, "users/index.html")
 }
 
-// UserDetailHandler renders the user.html template for the /users/{id} resource,
-// sending it the user struct found for that id
+// UserDetailHandler godoc
+// @Summary Serves the /users/{id} resource,
+// @Description Renders the user.html template for the /users/{id} resource, showing the user by specified path variable {id}
+// @ID get-user-by-id
+// @Param id path int true "User ID"
+// @Produce html
+// @Success 200 {object} string
+// @Failure 500
+// @Router /users/{id} [get]
 func (self *UsersHandler) UserDetailHandler(writer http.ResponseWriter, request *http.Request) {
 	params := mux.Vars(request)
 	id, err := strconv.Atoi(params["id"])
@@ -79,7 +92,7 @@ func (self *UsersHandler) UserDetailHandler(writer http.ResponseWriter, request 
 		self.NotFoundHandler(writer, request)
 	} else {
 		data := DataMap {
-			"user": GetUserById(*self.DbConn, id),
+			"user": GetUserById(self.DbConn, id),
 		}
 		executeTemplate(writer, request, data, "users/user.html")
 	}
