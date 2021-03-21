@@ -55,8 +55,17 @@ func route(usersHandler *users.UsersHandler) {
 func main() {
 	dbConn, err := repository.ConnectToDatabase()
 	if err != nil {
-		fmt.Println("Could not connect to database. 'users' won't work properly")
+		fmt.Println("Could not create connection object")
+		panic(err)
 	}
+
+	err = dbConn.Ping()
+	if err != nil {
+		fmt.Println("Couldn't connect to the database. 'users' won't work properly")
+		panic(err)
+	}
+
+	fmt.Println("Connection to database was successful!")
 	usersHandler := users.UsersHandler{DbConn: dbConn}
 	defer dbConn.Close()
 	route(&usersHandler)
