@@ -44,7 +44,6 @@ func route(usersHandler *users.UsersHandler) {
 		httpSwagger.URL("http://localhost:8080/swagger/doc.json"),
 	))
 
-	//router.HandleFunc("/swagger", httpSwagger.WrapHandler)
 	router.NotFoundHandler = http.HandlerFunc(usersHandler.NotFoundHandler)
 
 	fmt.Println("Started server on port 8080")
@@ -54,6 +53,8 @@ func route(usersHandler *users.UsersHandler) {
 // Entry point
 func main() {
 	dbConn, err := repository.ConnectToDatabase()
+	defer dbConn.Close()
+
 	if err != nil {
 		fmt.Println("Could not create connection object")
 		panic(err)
@@ -67,6 +68,5 @@ func main() {
 
 	fmt.Println("Connection to database was successful!")
 	usersHandler := users.UsersHandler{DbConn: dbConn}
-	defer dbConn.Close()
 	route(&usersHandler)
 }

@@ -9,9 +9,9 @@ import (
 
 // GetAllUsers returns a slice containing instances of User related to all the 
 // records in the "user" table. If there are no records, an empty slice is returned
-func GetAllUsers(dbConn sql.DB) []User {
+func GetAllUsers(dbConn *sql.DB) []User {
 	var allUsers []User
-	results, err := dbConn.Query("SELECT username, first_name, last_name, birthday, sex, biography FROM user")
+	results, err := (*dbConn).Query("SELECT username, first_name, last_name, birthday, sex, biography FROM user")
 	if err != nil {
 		fmt.Println("An error has occurred when performing the query. ", err)
 		return []User {}
@@ -30,9 +30,8 @@ func GetAllUsers(dbConn sql.DB) []User {
 }
 
 // GetUserById returns an instance of User, found by id in the "user" table
-func GetUserById(dbConn sql.DB, id int) *User {
-	results, err := dbConn.Query("SELECT username, first_name, last_name, birthday, sex, biography FROM user WHERE id = ?", id)
-	defer results.Close()
+func GetUserById(dbConn *sql.DB, id int) *User {
+	results, err := (*dbConn).Query("SELECT username, first_name, last_name, birthday, sex, biography FROM user WHERE id = ?", id)
 	if err != nil {
 		fmt.Println("An error has occurred when performing the query. ", err)
 		return nil
