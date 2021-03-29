@@ -2,7 +2,7 @@
 
 package arrays
 
-// merge combines the left and right solutions in-place on the origina array
+// merge combines the left and right solutions in-place on the original array
 func merge(array []int, left []int, right []int) {
 	i, j, k := 0, 0, 0
 	N, M := len(left), len(right)
