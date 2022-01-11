@@ -11,9 +11,13 @@ It is possible to import the **jikkodb.sql** script on the **jikkodb** database 
 
 Run `go build` to compile, and then `./jikko-golang` to run the server
 
+Alternatively, use `go run main.go`
+
+After adding more API docs remember to use `swag init -g main.go` before build/execution to update the documentation
+
 ## Endpoints
 
-### /swagger
+### /swagger/index.html
 
 Presents API documentation for the other endpoints
 
